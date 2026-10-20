@@ -1,0 +1,58 @@
+════════════════════════════════════════════════════
+  SISTEMA IRPC v3 — INSTRUÇÕES DE INSTALAÇÃO
+════════════════════════════════════════════════════
+
+PASSO A PASSO:
+
+1. Extraia o arquivo irpc-app-v3.tar.gz na sua pasta de projetos
+
+2. Abra o terminal dentro da pasta irpc-app-v3
+
+3. Instale as dependências:
+   npm install
+
+4. Configure suas credenciais do Firebase em:
+   src/lib/firebase.ts
+   (substitua os valores "SUA_API_KEY" etc pelos dados do seu projeto)
+
+5. Rode o projeto:
+   npm run dev
+
+6. Acesse no navegador:
+   http://localhost:5173
+
+════════════════════════════════════════════════════
+  MELHORIAS INCLUÍDAS NESTA VERSÃO
+════════════════════════════════════════════════════
+
+✅ Recuperação de senha por e-mail (botão "Esqueci minha senha")
+✅ Confirmação de senha no cadastro
+✅ Bloco de consentimento LGPD no cadastro
+✅ Botão ⚙️ de configurações na topbar
+✅ Tela de exclusão de conta com re-autenticação
+✅ Footer com link LGPD em todas as telas
+✅ Aba "Sobre" com seção de privacidade
+✅ Regras Firestore corrigidas (firestore.rules)
+
+════════════════════════════════════════════════════
+  ARQUIVOS MODIFICADOS
+════════════════════════════════════════════════════
+
+  src/App.tsx              — Settings integrado + footer LGPD
+  src/hooks/useAuth.ts     — forgotPassword + deleteAccount
+  src/components/AuthScreen.tsx — esqueci senha + consentimento
+  src/pages/Settings.tsx   — NOVO: exclusão de conta
+  src/pages/Sobre.tsx      — LGPD + link para configurações
+  firestore.rules          — regras de segurança corrigidas
+
+════════════════════════════════════════════════════
+  REGRAS FIRESTORE
+════════════════════════════════════════════════════
+
+Após o deploy, publique o arquivo firestore.rules no
+Firebase Console → Firestore → Regras.
+
+Isso corrige a vulnerabilidade de segurança onde qualquer
+usuário autenticado poderia ler dados de outros usuários.
+
+════════════════════════════════════════════════════

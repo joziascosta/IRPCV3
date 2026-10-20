@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+:root {
+  --navy:     #0770f0;   /* fundo sidebar / topbar */
+  --navy-2:   #0D2D55;   /* sidebar hover */
+  --navy-3:   #1B3F72;   /* stepper ativo / bordas */
+  --blue:     #2D6AB4;   /* azul médio links */
+  --blue-l:   #EBF3FB;   /* fundo azul claro */
+  --green:    #00A878;   /* botões primários / baixo risco */
+  --green-l:  #E6F7F2;
+  --green-d:  #00875F;
+  --amber:    #F5A623;   /* avisos */
+  --amber-l:  #FEF7EA;
+  --red:      #E53935;   /* alto risco */
+  --red-l:    #FDECEA;
+  --bg:       #F0F5FA;   /* fundo geral */
+  --card:     #FFFFFF;
+  --border:   #D8E4F0;
+  --text:     #082547;
+  --muted:    #6B8299;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────*/
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #B8CEDF; border-radius: 4px; }
+
+/* ─── Spinner ───────────────────────────────────────────────────────────────*/
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--blue-l);
+  border-top-color: var(--navy-3);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ─── Fade in ───────────────────────────────────────────────────────────────*/
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.animate-fade-in { animation: fadeIn 0.35s ease forwards; }
+
+/* ─── Gauge ─────────────────────────────────────────────────────────────────*/
+@keyframes gauge { from { stroke-dashoffset: 283; } }
+.gauge-arc { animation: gauge 1s ease forwards; }
+.gauge-baixo { stroke: var(--green); }
+.gauge-medio { stroke: var(--amber); }
+.gauge-alto  { stroke: var(--red);   }
+
+/* ─── Stepper ───────────────────────────────────────────────────────────────*/
+.step-line { flex: 1; height: 2px; background: var(--border); }
+.step-line.done { background: var(--navy-3); }
+
+/* ─── Nav ───────────────────────────────────────────────────────────────────*/
+.bnav-active { color: var(--navy-3) !important; }
+.bnav-active svg { stroke: var(--navy-3); }
+
+/* ─── Input focus ───────────────────────────────────────────────────────────*/
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--navy-3) !important;
+  box-shadow: 0 0 0 3px rgba(45,106,180,0.12);
+}
+
+/* ─── Select customizado ────────────────────────────────────────────────────*/
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B8299' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px !important;
+}
+
+/* ─── Checkbox ──────────────────────────────────────────────────────────────*/
+input[type="checkbox"] { accent-color: var(--navy-3); }
+
+/* ─── Sidebar nav ───────────────────────────────────────────────────────────*/
+.sidebar-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 20px; border-radius: 10px; cursor: pointer;
+  color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 500;
+  transition: all 0.18s; text-decoration: none; margin: 2px 0;
+}
+.sidebar-item:hover { background: rgba(255,255,255,0.08); color: white; }
+.sidebar-item.active { background: rgba(255,255,255,0.15); color: white; }
+.sidebar-item svg { flex-shrink: 0; }
+
+/* ─── Bottom nav (mobile) ───────────────────────────────────────────────────*/
+.bnav-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 6px 12px; color: var(--muted); font-size: 10px; font-weight: 500;
+  cursor: pointer; border: none; background: none; font-family: inherit;
+  flex: 1; transition: color 0.18s;
+}
+.bnav-btn.active { color: var(--navy-3); }
+
+/* ─── Cards ─────────────────────────────────────────────────────────────────*/
+.card {
+  background: var(--card); border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(10,34,64,0.06);
+}
+
+/* ─── Btn primário ──────────────────────────────────────────────────────────*/
+.btn-primary {
+  background: var(--green); color: white;
+  border: none; border-radius: 10px; padding: 13px 28px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.18s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--green-d); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,168,120,0.3); }
+.btn-primary:disabled { opacity: 0.6; transform: none; box-shadow: none; }
+
+/* ─── Btn outline ───────────────────────────────────────────────────────────*/
+.btn-outline {
+  background: transparent; color: var(--navy-3);
+  border: 2px solid var(--navy-3); border-radius: 10px; padding: 11px 24px;
+  font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: all 0.18s; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-outline:hover { background: var(--blue-l); }
+
+/* ─── Input ─────────────────────────────────────────────────────────────────*/
+.inp {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 14px; font-family: inherit; color: var(--text);
+  background: white; transition: border-color 0.18s, box-shadow 0.18s;
+}
+.inp::placeholder { color: #9BAFC2; }
+
+/* ─── Badge risco ───────────────────────────────────────────────────────────*/
+.badge-baixo { background: var(--green-l); color: var(--green-d); border: 1px solid #B3E8D8; }
+.badge-medio { background: var(--amber-l); color: #C47D00; border: 1px solid #FAD99A; }
+.badge-alto  { background: var(--red-l);   color: #B71C1C; border: 1px solid #FACACA; }
